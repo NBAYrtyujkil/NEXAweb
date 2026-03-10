@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>NexaWeb – We Build Digital Experiences That Convert</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="NexaWeb is a Tunisia-based web agency building high-converting digital experiences for clients worldwide." />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #080808;
+      --bg-alt: #0f1115;
+      --primary: #4f8ef7;
+      --primary-soft: rgba(79, 142, 247, 0.3);
+      --accent: #58ffea;
+      --text: #f5f7ff;
+      --muted: #9b9fb3;
+      --border-soft: rgba(255, 255, 255, 0.04);
+      --card-bg: rgba(15, 17, 25, 0.8);
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-pill: 999px;
+      --shadow-soft: 0 22px 60px rgba(0, 0, 0, 0.85);
+      --shadow-glow: 0 0 40px rgba(79, 142, 247, 0.45);
+      --transition-fast: 0.25s ease;
+      --transition-med: 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+      --nav-height: 80px;
+      --gradient-main: linear-gradient(120deg, #4f8ef7, #58ffea, #9b6bff);
+      --gradient-soft: radial-gradient(circle at 0% 0%, rgba(79, 142, 247, 0.4), transparent 55%),
+                       radial-gradient(circle at 100% 0%, rgba(88, 255, 234, 0.35), transparent 55%),
+                       radial-gradient(circle at 0% 100%, rgba(155, 107, 255, 0.3), transparent 55%);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      scroll-behavior: smooth;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .page-wrap {
+      position: relative;
+      isolation: isolate;
+      min-height: 100vh;
+      background: radial-gradient(circle at top left, rgba(79, 142, 247, 0.16), transparent 60%),
+                  radial-gradient(circle at top right, rgba(88, 255, 234, 0.12), transparent 50%),
+                  radial-gradient(circle at bottom, rgba(155, 107, 255, 0.14), transparent 55%),
+                  #050509;
+    }
+
+    .page-wrap::before {
+      content: "";
+      position: fixed; inset: -40%;
+      background: conic-gradient(from 160deg, rgba(79, 142, 247, 0.25), rgba(88, 255, 234, 0.06), rgba(9, 9, 16, 0.2), rgba(155, 107, 255, 0.2), rgba(79, 142, 247, 0.25));
+      opacity: 0.58; mix-blend-mode: screen;
+      animation: swirl 26s linear infinite; z-index: -2;
+    }
+
+    .page-wrap::after {
+      content: ""; position: fixed; inset: -20%;
+      background: radial-gradient(circle at 15% 20%, rgba(79, 142, 247, 0.2), transparent),
+                  radial-gradient(circle at 85% 10%, rgba(88, 255, 234, 0.18), transparent),
+                  radial-gradient(circle at 80% 80%, rgba(155, 107, 255, 0.2), transparent);
+      opacity: 0.9; z-index: -1;
+    }
+
+    @keyframes swirl {
+      0% { transform: rotate(0deg) scale(1.05); }
+      100% { transform: rotate(360deg) scale(1.05); }
+    }
+
+    .container { width: min(1160px, 100% - 40px); margin-inline: auto; }
+
+    section { padding-block: 80px; position: relative; z-index: 1; }
+
+    .section-header { max-width: 620px; margin-bottom: 40px; }
+
+    .section-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 4px 14px; border-radius: 999px;
+      background: linear-gradient(120deg, rgba(79, 142, 247, 0.19), rgba(88, 255, 234, 0.1));
+      border: 1px solid rgba(88, 255, 234, 0.4);
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 16px;
+    }
+
+    .section-tag-dot {
+      width: 7px; height: 7px; border-radius: 999px;
+      background: var(--accent); box-shadow: 0 0 0 6px rgba(88, 255, 234, 0.18);
+    }
+
+    .section-title {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: clamp(28px, 3vw, 34px); letter-spacing: -0.03em; margin-bottom: 10px;
+    }
+
+    .section-title span.gradient {
+      background-image: var(--gradient-main);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .section-subtitle { color: var(--muted); font-size: 15px; line-height: 1.6; }
+
+    /* Navbar */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; height: var(--nav-height);
+      display: flex; align-items: center; z-index: 50;
+      transition: background 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      border-bottom: 1px solid transparent; backdrop-filter: blur(18px);
+    }
+
+    .navbar-inner {
+      display: flex; justify-content: space-between; align-items: center;
+      width: min(1160px, 100% - 40px); margin: 0 auto; gap: 24px;
+    }
+
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+
+    .nav-logo-mark {
+      width: 32px; height: 32px; border-radius: 14px;
+      background: radial-gradient(circle at 30% 20%, #58ffea, #4f8ef7);
+      box-shadow: 0 0 28px rgba(79, 142, 247, 0.95);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; font-family: "Space Grotesk", sans-serif;
+    }
+
+    .nav-logo-text { display: flex; flex-direction: column; }
+    .nav-logo-title { font-family: "Space Grotesk", sans-serif; font-weight: 600; letter-spacing: 0.04em; }
+    .nav-logo-sub { font-size: 11px; text-transform: uppercase; color: var(--muted); letter-spacing: 0.14em; }
+
+    .nav-links { display: flex; align-items: center; gap: 26px; font-size: 14px; color: var(--muted); }
+
+    .nav-links a {
+      position: relative; padding-block: 4px; cursor: pointer;
+      transition: color var(--transition-fast);
+    }
+
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; bottom: 0; width: 0; height: 2px;
+      border-radius: 999px; background: linear-gradient(90deg, #4f8ef7, #58ffea);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover { color: #ffffff; }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-cta { display: flex; align-items: center; gap: 12px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 11px 22px; border-radius: var(--radius-pill);
+      border: 1px solid var(--border-soft);
+      background: radial-gradient(circle at top left, rgba(79, 142, 247, 0.38), rgba(8, 8, 8, 0.9));
+      color: #ffffff; font-size: 13px; font-weight: 500; letter-spacing: 0.04em;
+      text-transform: uppercase; cursor: pointer; position: relative; overflow: hidden;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .btn span { position: relative; z-index: 1; }
+
+    .btn::before {
+      content: ""; position: absolute; inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(255, 255, 255, 0.55), transparent 60%);
+      opacity: 0; transition: opacity 0.3s ease; transform: translate3d(-40%, -60%, 0);
+    }
+
+    .btn-primary {
+      border-color: rgba(79, 142, 247, 0.7);
+      background: linear-gradient(120deg, #4f8ef7, #58ffea);
+      color: #020308; box-shadow: var(--shadow-soft), 0 0 24px rgba(79, 142, 247, 0.8);
+    }
+
+    .btn-outline {
+      background: radial-gradient(circle at top left, rgba(79, 142, 247, 0.18), rgba(8, 8, 8, 0.98));
+      border-color: rgba(88, 255, 234, 0.4); color: var(--accent);
+    }
+
+    .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-glow); border-color: rgba(79, 142, 247, 0.95); }
+    .btn:hover::before { opacity: 0.6; }
+
+    .btn-icon {
+      width: 18px; height: 18px; border-radius: 999px;
+      border: 1px solid rgba(8, 8, 8, 0.4);
+      display: inline-flex; align-items: center; justify-content: center;
+      background: rgba(8, 8, 8, 0.12); font-size: 11px;
+    }
+
+    .hamburger {
+      display: none; width: 32px; height: 32px; border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(10, 10, 15, 0.8);
+      align-items: center; justify-content: center; cursor: pointer; position: relative; overflow: hidden;
+    }
+
+    .hamburger span, .hamburger::before, .hamburger::after {
+      position: absolute; content: ""; width: 16px; height: 1.8px;
+      border-radius: 999px; background: #ffffff;
+      transition: transform 0.26s ease, opacity 0.22s ease, top 0.26s ease, bottom 0.26s ease;
+    }
+
+    .hamburger::before { top: 11px; }
+    .hamburger::after { bottom: 11px; }
+    .hamburger.active span { transform: scaleX(0); opacity: 0; }
+    .hamburger.active::before { transform: translateY(4px) rotate(45deg); }
+    .hamburger.active::after { transform: translateY(-4px) rotate(-45deg); }
+
+    .navbar.scrolled {
+      background: rgba(4, 5, 10, 0.94);
+      border-color: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 18px 80px rgba(0, 0, 0, 0.84);
+    }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh; padding-top: calc(var(--nav-height) + 30px);
+      padding-bottom: 90px; display: flex; align-items: center;
+    }
+
+    .hero-grid {
+      display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 56px; align-items: center;
+    }
+
+    .hero-kicker {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 4px 12px; border-radius: 999px;
+      border: 1px solid rgba(88, 255, 234, 0.38); background: rgba(6, 10, 16, 0.78);
+      backdrop-filter: blur(16px); margin-bottom: 16px;
+      font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent);
+    }
+
+    .hero-kicker-dot {
+      width: 7px; height: 7px; border-radius: 999px;
+      background: var(--primary); box-shadow: 0 0 0 6px rgba(79, 142, 247, 0.26);
+    }
+
+    .hero-title {
+      font-family: "Space Grotesk", system-ui, sans-serif;
+      font-size: clamp(42px, 5vw, 56px); line-height: 1.05;
+      letter-spacing: -0.06em; margin-bottom: 14px;
+    }
+
+    .hero-title span {
+      display: inline-block; background-image: var(--gradient-main);
+      background-size: 200% auto; -webkit-background-clip: text;
+      background-clip: text; color: transparent; animation: gradientShift 9s ease infinite;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero-subtitle { color: var(--muted); font-size: 15px; line-height: 1.7; max-width: 420px; margin-bottom: 26px; }
+
+    .hero-highlight { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; color: var(--muted); font-size: 13px; }
+
+    .hero-highlight-pill {
+      padding: 4px 10px; border-radius: 999px;
+      border: 1px solid rgba(79, 142, 247, 0.55); background: rgba(7, 9, 13, 0.9);
+      font-size: 11px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--primary);
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 26px; }
+
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 16px; font-size: 12px; color: var(--muted); }
+
+    .hero-meta-item { display: flex; align-items: center; gap: 8px; }
+
+    .hero-meta-badge {
+      width: 18px; height: 18px; border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #58ffea, #4f8ef7);
+      box-shadow: 0 0 18px rgba(79, 142, 247, 0.74);
+    }
+
+    .hero-visual { position: relative; min-height: 320px; }
+
+    .hero-orbit {
+      position: absolute; inset: 0; border-radius: 42px; padding: 2px;
+      background: conic-gradient(from 0deg, rgba(79, 142, 247, 0.76), rgba(88, 255, 234, 0.25), rgba(14, 15, 20, 1), rgba(155, 107, 255, 0.5), rgba(79, 142, 247, 0.76));
+      box-shadow: 0 0 80px rgba(79, 142, 247, 0.5); animation: orbitGlow 14s linear infinite;
+    }
+
+    .hero-orbit-inner {
+      height: 100%; width: 100%; border-radius: 38px; padding: 22px;
+      background: radial-gradient(circle at top left, rgba(79, 142, 247, 0.22), rgba(8, 8, 12, 0.96));
+      display: flex; flex-direction: column; justify-content: space-between;
+      position: relative; overflow: hidden;
+    }
+
+    @keyframes orbitGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hero-orbit-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+    .hero-orbit-label { font-size: 13px; color: var(--muted); }
+    .hero-orbit-label strong { display: block; color: #ffffff; font-size: 17px; margin-bottom: 4px; }
+
+    .hero-orbit-badge {
+      padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(88, 255, 234, 0.6);
+      background: rgba(5, 10, 18, 0.85); font-size: 11px; color: var(--accent);
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+
+    .hero-orbit-badge-dot { width: 6px; height: 6px; border-radius: 999px; background: var(--accent); box-shadow: 0 0 0 6px rgba(88, 255, 234, 0.24); }
+
+    .hero-grid-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-top: 24px; }
+
+    .stat-card {
+      border-radius: 18px; background: rgba(6, 9, 16, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.07); padding: 12px 14px;
+      backdrop-filter: blur(12px); position: relative; overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: ""; position: absolute; inset: -40%;
+      background: radial-gradient(circle at top, rgba(79, 142, 247, 0.35), transparent 60%);
+      opacity: 0.7; mix-blend-mode: screen;
+    }
+
+    .stat-label { font-size: 11px; color: var(--muted); margin-bottom: 4px; }
+    .stat-value { font-family: "Space Grotesk", sans-serif; font-size: 18px; font-weight: 600; }
+    .stat-unit { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .hero-float-pill {
+      position: absolute; right: -10px; top: 18%;
+      padding: 8px 14px; border-radius: 999px;
+      border: 1px solid rgba(79, 142, 247, 0.6);
+      background: radial-gradient(circle at top left, rgba(79, 142, 247, 0.7), rgba(8, 8, 10, 0.95));
+      color: #ffffff; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      display: inline-flex; align-items: center; gap: 8px;
+      box-shadow: var(--shadow-glow); animation: floatY 5s ease-in-out infinite;
+    }
+
+    .hero-float-pill-dot { width: 8px; height: 8px; border-radius: 999px; background: #0aff91; box-shadow: 0 0 0 6px rgba(10, 255, 145, 0.28); }
+
+    .hero-float-badge {
+      position: absolute; left: -2px; bottom: 16%; padding: 12px 16px; border-radius: 20px;
+      border: 1px solid rgba(88, 255, 234, 0.6); background: rgba(6, 9, 16, 0.96);
+      color: var(--muted); font-size: 12px; max-width: 180px;
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.9); animation: floatY 7s ease-in-out infinite alternate;
+    }
+
+    .hero-float-badge strong { display: block; color: #ffffff; margin-bottom: 4px; font-size: 13px; }
+
+    @keyframes floatY {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    /* Cards */
+    .card {
+      position: relative; border-radius: var(--radius-lg); padding: 22px 22px 20px;
+      background: linear-gradient(140deg, rgba(25, 29, 41, 0.94), rgba(9, 10, 17, 0.96));
+      border: 1px solid rgba(255, 255, 255, 0.04); box-shadow: 0 24px 65px rgba(0, 0, 0, 0.9);
+      backdrop-filter: blur(22px); overflow: hidden;
+      transform: translateY(0); transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med);
+    }
+
+    .card::before {
+      content: ""; position: absolute; inset: -40%;
+      background: radial-gradient(circle at top left, rgba(79, 142, 247, 0.35), transparent 60%),
+                  radial-gradient(circle at bottom right, rgba(155, 107, 255, 0.28), transparent 60%);
+      opacity: 0.55; mix-blend-mode: screen; z-index: -1;
+    }
+
+    .card-hover-glow:hover { transform: translateY(-10px); box-shadow: var(--shadow-glow); border-color: rgba(79, 142, 247, 0.7); }
+
+    .card-title { font-family: "Space Grotesk", sans-serif; font-size: 17px; margin-bottom: 6px; }
+    .card-text { color: var(--muted); font-size: 14px; line-height: 1.6; margin-bottom: 10px; }
+    .card-tag {
+      display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px;
+      border-radius: 999px; background: rgba(7, 10, 16, 0.9); color: var(--muted);
+      font-size: 11px; border: 1px solid rgba(79, 142, 247, 0.4);
+    }
+
+    .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+
+    .services-icon-circle {
+      width: 40px; height: 40px; border-radius: 16px;
+      background: radial-gradient(circle at 20% 20%, #58ffea, #4f8ef7);
+      display: flex; align-items: center; justify-content: center;
+      color: #020308; font-size: 18px; margin-bottom: 16px;
+      box-shadow: 0 0 24px rgba(79, 142, 247, 0.85);
+    }
+
+    .services-footer { margin-top: 22px; font-size: 13px; color: var(--muted); }
+
+    /* Process */
+    .process-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+
+    .process-card {
+      border-radius: var(--radius-md); padding: 18px 18px 16px;
+      background: rgba(11, 13, 22, 0.95); border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.85); backdrop-filter: blur(18px);
+      transform: translateY(0); transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med);
+      position: relative; overflow: hidden;
+    }
+
+    .process-card::before {
+      content: ""; position: absolute; inset: -40%;
+      background: radial-gradient(circle at top, rgba(79, 142, 247, 0.26), transparent 55%);
+      opacity: 0.5; mix-blend-mode: screen; z-index: -1;
+    }
+
+    .process-card:hover { transform: translateY(-8px); border-color: rgba(79, 142, 247, 0.6); box-shadow: var(--shadow-glow); }
+
+    .process-step { font-size: 11px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); margin-bottom: 10px; }
+    .process-title { font-family: "Space Grotesk", sans-serif; font-size: 15px; margin-bottom: 6px; }
+    .process-text { color: var(--muted); font-size: 13px; line-height: 1.55; }
+
+    /* Projects */
+    .projects-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+
+    .project-card {
+      border-radius: 24px; background: rgba(11, 13, 22, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 24px 70px rgba(0, 0, 0, 0.9);
+      overflow: hidden; transform: translateY(0);
+      transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med);
+    }
+
+    .project-thumb { position: relative; height: 160px; overflow: hidden; background: #080a12; }
+
+    .project-thumb::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(79, 142, 247, 0.9), rgba(88, 255, 234, 0.75));
+      opacity: 0.8; mix-blend-mode: screen;
+    }
+
+    .project-thumb-pattern {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle at 0 0, rgba(8, 8, 12, 0.3) 0, transparent 36%),
+                        radial-gradient(circle at 80% 40%, rgba(8, 8, 12, 0.4) 0, transparent 45%);
+      opacity: 0.7;
+    }
+
+    .project-label {
+      position: absolute; left: 14px; bottom: 14px; padding: 4px 10px;
+      border-radius: 999px; border: 1px solid rgba(8, 8, 12, 0.8);
+      background: rgba(8, 8, 12, 0.84); font-size: 11px; color: #e8ecff;
+      text-transform: uppercase; letter-spacing: 0.14em;
+    }
+
+    .project-body { padding: 18px 18px 16px; }
+
+    .project-meta {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 6px; font-size: 11px; color: var(--muted);
+      text-transform: uppercase; letter-spacing: 0.16em;
+    }
+
+    .project-title { font-family: "Space Grotesk", sans-serif; font-size: 16px; margin-bottom: 6px; }
+    .project-text { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
+    .project-link { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--accent); }
+
+    .project-card:hover { transform: translateY(-10px); border-color: rgba(79, 142, 247, 0.8); box-shadow: var(--shadow-glow); }
+
+    /* Pricing */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+
+    .pricing-card {
+      border-radius: 24px; padding: 22px 22px 20px;
+      background: rgba(9, 11, 19, 0.98); border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 22px 68px rgba(0, 0, 0, 0.9); position: relative; overflow: hidden;
+      transform: translateY(0); transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med);
+    }
+
+    .pricing-card::before {
+      content: ""; position: absolute; inset: -40%;
+      background: radial-gradient(circle at top left, rgba(79, 142, 247, 0.38), transparent 55%);
+      opacity: 0.6; mix-blend-mode: screen; z-index: -1;
+    }
+
+    .pricing-tier { font-size: 12px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--muted); margin-bottom: 10px; }
+    .pricing-price { font-family: "Space Grotesk", sans-serif; font-size: 26px; margin-bottom: 4px; }
+    .pricing-price span { font-size: 14px; color: var(--muted); margin-left: 4px; }
+    .pricing-description { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+    .pricing-features { list-style: none; margin-bottom: 16px; font-size: 13px; color: var(--muted); }
+    .pricing-features li { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
+
+    .pricing-bullet {
+      width: 12px; height: 12px; border-radius: 999px;
+      border: 1px solid rgba(88, 255, 234, 0.6);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px; color: var(--accent); flex-shrink: 0; margin-top: 2px;
+    }
+
+    .pricing-cta { width: 100%; justify-content: center; font-size: 12px; }
+
+    .pricing-popular {
+      border-color: rgba(79, 142, 247, 0.9);
+      background: linear-gradient(145deg, rgba(38, 48, 72, 0.98), rgba(9, 11, 18, 1));
+      box-shadow: 0 26px 80px rgba(79, 142, 247, 0.7); transform: translateY(-8px);
+    }
+
+    .pricing-popular::after {
+      content: "Most Popular"; position: absolute; top: 12px; right: 14px;
+      padding: 4px 10px; border-radius: 999px;
+      border: 1px solid rgba(88, 255, 234, 0.8); background: rgba(6, 10, 16, 0.96);
+      font-size: 10px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--accent);
+    }
+
+    .pricing-card:hover { transform: translateY(-12px) scale(1.01); box-shadow: var(--shadow-glow); border-color: rgba(79, 142, 247, 1); }
+
+    /* Testimonials */
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+
+    .testimonial-card {
+      border-radius: 22px; padding: 22px 22px 20px;
+      background: rgba(10, 12, 19, 0.98); border: 1px solid rgba(255, 255, 255, 0.05);
+      box-shadow: 0 22px 68px rgba(0, 0, 0, 0.9); backdrop-filter: blur(18px);
+      transform: translateY(0); transition: transform var(--transition-med), box-shadow var(--transition-med), border-color var(--transition-med);
+      position: relative; overflow: hidden;
+    }
+
+    .testimonial-card::before {
+      content: "\201C"; position: absolute; top: -40px; right: 12px;
+      font-size: 80px; color: rgba(79, 142, 247, 0.28); opacity: 0.7;
+    }
+
+    .testimonial-header { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+
+    .avatar {
+      width: 36px; height: 36px; border-radius: 999px;
+      background: radial-gradient(circle at 30% 20%, #58ffea, #4f8ef7);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; color: #020308; box-shadow: 0 0 24px rgba(79, 142, 247, 0.8);
+    }
+
+    .testimonial-name { font-family: "Space Grotesk", sans-serif; margin-bottom: 2px; font-size: 12px; }
+    .testimonial-role { color: var(--muted); font-size: 11px; }
+    .stars { font-size: 13px; color: #ffd66b; margin-bottom: 10px; }
+    .testimonial-text { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .testimonial-card:hover { transform: translateY(-8px); border-color: rgba(79, 142, 247, 0.8); box-shadow: var(--shadow-glow); }
+
+    /* Contact */
+    .contact-grid { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 26px; align-items: flex-start; }
+    .contact-intro { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 18px; }
+
+    .contact-pill {
+      display: inline-flex; align-items: center; gap: 8px; padding: 4px 11px;
+      border-radius: 999px; border: 1px solid rgba(79, 142, 247, 0.6);
+      background: rgba(6, 9, 16, 0.96); font-size: 11px; color: var(--accent); margin-bottom: 8px;
+    }
+
+    .contact-pill-dot { width: 7px; height: 7px; border-radius: 999px; background: #0aff91; box-shadow: 0 0 0 6px rgba(10, 255, 145, 0.24); }
+
+    .contact-list { list-style: none; margin-top: 10px; font-size: 13px; color: var(--muted); }
+    .contact-list li { margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+
+    .contact-form-card {
+      border-radius: 24px; padding: 22px 22px 20px;
+      background: rgba(8, 10, 18, 0.98); border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.9); backdrop-filter: blur(22px);
+    }
+
+    .form-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-bottom: 14px; }
+    .form-group { margin-bottom: 14px; }
+
+    label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .required { color: #ff6b81; margin-left: 3px; }
+
+    input, textarea, select {
+      width: 100%; padding: 11px 12px; border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(4, 6, 12, 0.96);
+      color: var(--text); font-size: 13px; outline: none;
+      transition: border-color 0.18s ease, box-shadow 0.18s ease;
+      font-family: inherit; resize: vertical;
+    }
+
+    input::placeholder, textarea::placeholder { color: rgba(155, 159, 179, 0.7); }
+    input:focus, textarea:focus, select:focus { border-color: rgba(79, 142, 247, 0.9); box-shadow: 0 0 0 1px rgba(79, 142, 247, 0.7); }
+
+    .error-message { font-size: 11px; color: #ff6b81; margin-top: 4px; display: none; }
+    .invalid input, .invalid textarea, .invalid select { border-color: rgba(255, 107, 129, 0.9); }
+    .invalid .error-message { display: block; }
+
+    .form-footer { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 10px; font-size: 11px; color: var(--muted); }
+    .form-status { min-height: 16px; }
+    .form-status.success { color: #3dd68c; }
+    .form-status.error { color: #ff6b81; }
+
+    /* Footer */
+    footer {
+      padding: 28px 0 32px; border-top: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(5, 6, 10, 0.96); backdrop-filter: blur(20px);
+    }
+
+    .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; font-size: 12px; color: var(--muted); }
+    .footer-left { display: flex; align-items: center; gap: 10px; }
+    .footer-links { display: flex; gap: 16px; }
+    .footer-links a { transition: color 0.2s ease; }
+    .footer-links a:hover { color: #ffffff; }
+    .footer-social { display: flex; align-items: center; gap: 10px; }
+
+    .social-btn {
+      width: 26px; height: 26px; border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 13px; color: var(--muted); background: rgba(8, 9, 14, 0.96);
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .social-btn:hover { transform: translateY(-2px); border-color: rgba(79, 142, 247, 0.9); color: var(--accent); }
+
+    /* Reveal animations */
+    .reveal {
+      opacity: 0; transform: translateY(36px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.slide-left { transform: translateX(40px); }
+    .reveal.slide-right { transform: translateX(-40px); }
+    .reveal.visible { opacity: 1; transform: translateX(0) translateY(0); }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 40px; }
+      .services-grid, .projects-grid, .pricing-grid, .testimonials-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .process-steps { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: inline-flex; }
+      .mobile-menu { position: fixed; top: var(--nav-height); left: 0; right: 0; background: rgba(5, 6, 12, 0.98); border-bottom: 1px solid rgba(255, 255, 255, 0.06); padding: 14px 20px 16px; display: none; flex-direction: column; gap: 14px; z-index: 40; backdrop-filter: blur(20px); }
+      .mobile-menu.open { display: flex; }
+      .mobile-links { display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: var(--muted); }
+      .mobile-links a { padding: 4px 0; }
+      .hero-grid { grid-template-columns: minmax(0, 1fr); }
+      .services-grid, .projects-grid, .pricing-grid, .testimonials-grid { grid-template-columns: minmax(0, 1fr); }
+      .process-steps, .contact-grid { grid-template-columns: minmax(0, 1fr); }
+      .form-row { grid-template-columns: minmax(0, 1fr); }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { width: 100%; justify-content: center; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="navbar-inner">
+        <a href="#top" class="nav-logo">
+          <div class="nav-logo-mark">N</div>
+          <div class="nav-logo-text">
+            <div class="nav-logo-title">NexaWeb</div>
+            <div class="nav-logo-sub">Digital Agency</div>
+          </div>
+        </a>
+        <nav class="nav-links">
+          <a data-scroll="#services">Services</a>
+          <a data-scroll="#process">Process</a>
+          <a data-scroll="#projects">Projects</a>
+          <a data-scroll="#pricing">Pricing</a>
+          <a data-scroll="#testimonials">Clients</a>
+          <a data-scroll="#contact">Contact</a>
+        </nav>
+        <div class="nav-cta">
+          <button class="btn btn-primary" data-scroll="#contact">
+            <span>Get a Quote</span><span class="btn-icon">↗</span>
+          </button>
+        </div>
+        <div class="hamburger" aria-label="Toggle navigation" aria-expanded="false"><span></span></div>
+      </div>
+      <div class="mobile-menu">
+        <div class="mobile-links">
+          <a data-scroll="#services">Services</a>
+          <a data-scroll="#process">Process</a>
+          <a data-scroll="#projects">Projects</a>
+          <a data-scroll="#pricing">Pricing</a>
+          <a data-scroll="#testimonials">Clients</a>
+          <a data-scroll="#contact">Contact</a>
+        </div>
+        <div class="mobile-cta">
+          <button class="btn btn-primary" style="width:100%;" data-scroll="#contact"><span>Get a Quote</span><span class="btn-icon">↗</span></button>
+        </div>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Hero -->
+      <section class="hero">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-content reveal">
+              <div class="hero-kicker"><div class="hero-kicker-dot"></div>NexaWeb · Digital Experiences</div>
+              <h1 class="hero-title">We Build <span>Digital Experiences</span> That Convert.</h1>
+              <p class="hero-subtitle">NexaWeb is a web agency based in Tunisia, partnering with ambitious brands worldwide to design, develop and launch websites that actually move the needle.</p>
+              <div class="hero-highlight">
+                <div class="hero-highlight-pill">Conversion-Driven Web Agency</div>
+                <span>From idea to launch in weeks, not months.</span>
+              </div>
+              <div class="hero-actions">
+                <button class="btn btn-primary" data-scroll="#projects"><span>View Our Work</span><span class="btn-icon">★</span></button>
+                <button class="btn btn-outline" data-scroll="#pricing"><span>See Pricing</span><span class="btn-icon">DT</span></button>
+              </div>
+              <div class="hero-meta">
+                <div class="hero-meta-item"><div class="hero-meta-badge"></div><span>Based in Tunisia · Serving clients worldwide</span></div>
+                <div class="hero-meta-item"><div class="hero-meta-badge"></div><span>Specialised in high-converting experiences</span></div>
+              </div>
+            </div>
+            <div class="hero-visual reveal slide-left">
+              <div class="hero-orbit">
+                <div class="hero-orbit-inner">
+                  <div class="hero-orbit-top">
+                    <div class="hero-orbit-label"><strong>Conversion Engine</strong>Crafted UX, performance and storytelling for your next launch.</div>
+                    <div class="hero-orbit-badge"><span class="hero-orbit-badge-dot"></span>Tunisie · Remote-first</div>
+                  </div>
+                  <div class="hero-grid-stats">
+                    <div class="stat-card"><div class="stat-label">Projects Shipped</div><div class="stat-value"><span class="counter" data-target="50">0</span>+</div><div class="stat-unit">Web experiences launched</div></div>
+                    <div class="stat-card"><div class="stat-label">Happy Clients</div><div class="stat-value"><span class="counter" data-target="30">0</span>+</div><div class="stat-unit">Brands we partnered with</div></div>
+                    <div class="stat-card"><div class="stat-label">Years Active</div><div class="stat-value"><span class="counter" data-target="3">0</span></div><div class="stat-unit">Of shipping, testing, refining</div></div>
+                  </div>
+                  <div class="hero-float-pill"><span class="hero-float-pill-dot"></span>Launch-ready in as little as 4 weeks</div>
+                  <div class="hero-float-badge"><strong>Conversion-first mindset</strong>We merge design, copy and tech into a single experience designed to convert.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services -->
+      <section id="services">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-tag"><span class="section-tag-dot"></span>Services</div>
+            <h2 class="section-title">What <span class="gradient">NexaWeb</span> builds for you.</h2>
+            <p class="section-subtitle">From first pixel to final deployment, we design and build digital experiences that feel fast, intentional and tailored to your brand.</p>
+          </div>
+          <div class="services-grid">
+            <article class="card card-hover-glow reveal"><div class="services-icon-circle">🎨</div><h3 class="card-title">Web Design</h3><p class="card-text">High-impact layouts, color systems and visual identities that keep visitors scrolling.</p><span class="card-tag">Wireframes · Visual Systems</span></article>
+            <article class="card card-hover-glow reveal"><div class="services-icon-circle">💻</div><h3 class="card-title">Web Development</h3><p class="card-text">Pixel-perfect, responsive builds with clean, scalable code and smooth interactions.</p><span class="card-tag">Responsive · Fast · Secure</span></article>
+            <article class="card card-hover-glow reveal"><div class="services-icon-circle">🛒</div><h3 class="card-title">E-commerce</h3><p class="card-text">Stores optimised for conversion, with frictionless product discovery and checkout flows.</p><span class="card-tag">Conversion-Focused Stores</span></article>
+            <article class="card card-hover-glow reveal"><div class="services-icon-circle">🚀</div><h3 class="card-title">SEO Optimization</h3><p class="card-text">Technical SEO, performance tuning and on-page optimisation to help you rank.</p><span class="card-tag">Core Web Vitals · On-page</span></article>
+            <article class="card card-hover-glow reveal"><div class="services-icon-circle">📐</div><h3 class="card-title">UI/UX Design</h3><p class="card-text">Interfaces that reduce friction and guide users towards actions that matter.</p><span class="card-tag">User Flows · Prototyping</span></article>
+            <article class="card card-hover-glow reveal"><div class="services-icon-circle">🤖</div><h3 class="card-title">AI Integration</h3><p class="card-text">Smart chatbots, recommendation engines and automation flows integrated seamlessly.</p><span class="card-tag">Chatbots · Automation</span></article>
+          </div>
+          <p class="services-footer reveal">Not sure where to start? We'll help you choose the right services based on your goals and budget.</p>
+        </div>
+      </section>
+
+      <!-- Process -->
+      <section id="process">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-tag"><span class="section-tag-dot"></span>Process</div>
+            <h2 class="section-title">A clear, <span class="gradient">four-step</span> way of working.</h2>
+            <p class="section-subtitle">We keep things transparent, structured and collaborative – so you always know what's happening and what comes next.</p>
+          </div>
+          <div class="process-steps">
+            <article class="process-card reveal"><div class="process-step">01 · Discovery</div><h3 class="process-title">Deep dive into your brand</h3><p class="process-text">We map your goals, audience and success metrics so the project is anchored in real business outcomes.</p></article>
+            <article class="process-card reveal"><div class="process-step">02 · Design</div><h3 class="process-title">Crafting the experience</h3><p class="process-text">We translate strategy into interfaces and prototypes, iterating with you until it feels just right.</p></article>
+            <article class="process-card reveal"><div class="process-step">03 · Develop</div><h3 class="process-title">Building for performance</h3><p class="process-text">We develop fast, accessible, responsive front-ends that are easy to maintain and ready to scale.</p></article>
+            <article class="process-card reveal"><div class="process-step">04 · Launch</div><h3 class="process-title">Launch & beyond</h3><p class="process-text">We handle deployment, tracking setup and quality checks, and support you with refinements post-launch.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section id="projects">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-tag"><span class="section-tag-dot"></span>Projects</div>
+            <h2 class="section-title">Selected <span class="gradient">launch-ready</span> work.</h2>
+            <p class="section-subtitle">A snapshot of how we mix brand, UX and engineering into cohesive experiences that convert visitors into customers.</p>
+          </div>
+          <div class="projects-grid">
+            <article class="project-card reveal"><div class="project-thumb"><div class="project-thumb-pattern"></div><span class="project-label">Restaurant Site</span></div><div class="project-body"><div class="project-meta"><span>Hospitality</span><span>Brand + Web</span></div><h3 class="project-title">Fine Dining in Tunis</h3><p class="project-text">High-end restaurant website with immersive visuals, easy reservations and curated tasting menu flows.</p><div class="project-link"><span>Explore concept</span><span>↗</span></div></div></article>
+            <article class="project-card reveal"><div class="project-thumb"><div class="project-thumb-pattern"></div><span class="project-label">Analytics Dashboard</span></div><div class="project-body"><div class="project-meta"><span>SaaS</span><span>Product UI</span></div><h3 class="project-title">Insightful Data Dashboard</h3><p class="project-text">A clean, responsive dashboard with custom charts, role-based views and AI-assisted insights.</p><div class="project-link"><span>View interface</span><span>↗</span></div></div></article>
+            <article class="project-card reveal"><div class="project-thumb"><div class="project-thumb-pattern"></div><span class="project-label">E-commerce Store</span></div><div class="project-body"><div class="project-meta"><span>Retail</span><span>E-commerce</span></div><h3 class="project-title">Conversion-first Storefront</h3><p class="project-text">Modern shop with personalised recommendations, fast search and streamlined checkout.</p><div class="project-link"><span>See store UX</span><span>↗</span></div></div></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Pricing -->
+      <section id="pricing">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-tag"><span class="section-tag-dot"></span>Pricing</div>
+            <h2 class="section-title">Transparent <span class="gradient">project-ready</span> pricing.</h2>
+            <p class="section-subtitle">Three starting points for different stages of your brand. All packages can be tailored to your needs and budget.</p>
+          </div>
+          <div class="pricing-grid">
+            <article class="pricing-card reveal"><div class="pricing-tier">Starter</div><div class="pricing-price">299DT<span>/ project</span></div><p class="pricing-description">Ideal for early-stage brands needing a polished one-page presence.</p><ul class="pricing-features"><li><span class="pricing-bullet">✓</span><span>Single-page landing design & build</span></li><li><span class="pricing-bullet">✓</span><span>Responsive across mobile & desktop</span></li><li><span class="pricing-bullet">✓</span><span>Basic analytics & contact form</span></li></ul><button class="btn btn-outline pricing-cta" data-scroll="#contact"><span>Start with Starter</span></button></article>
+            <article class="pricing-card pricing-popular reveal"><div class="pricing-tier">Pro</div><div class="pricing-price">599DT<span>/ project</span></div><p class="pricing-description">Our most popular package for ambitious brands ready to invest in performance and conversions.</p><ul class="pricing-features"><li><span class="pricing-bullet">✓</span><span>Multi-page website (up to 6 pages)</span></li><li><span class="pricing-bullet">✓</span><span>Conversion-focused UX & copy guidance</span></li><li><span class="pricing-bullet">✓</span><span>SEO, performance tuning & integrations</span></li><li><span class="pricing-bullet">✓</span><span>Post-launch refinements (30 days)</span></li></ul><button class="btn btn-primary pricing-cta" data-scroll="#contact"><span>Request Pro Quote</span></button></article>
+            <article class="pricing-card reveal"><div class="pricing-tier">Enterprise</div><div class="pricing-price">Custom<span>/ scope</span></div><p class="pricing-description">For complex products, e-commerce and SaaS platforms needing tailored architecture.</p><ul class="pricing-features"><li><span class="pricing-bullet">✓</span><span>Custom strategy & UX workshops</span></li><li><span class="pricing-bullet">✓</span><span>Advanced integrations & automations</span></li><li><span class="pricing-bullet">✓</span><span>Dedicated support & optimisation sprints</span></li></ul><button class="btn btn-outline pricing-cta" data-scroll="#contact"><span>Talk about Enterprise</span></button></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section id="testimonials">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-tag"><span class="section-tag-dot"></span>Testimonials</div>
+            <h2 class="section-title">Brands that <span class="gradient">trust</span> NexaWeb.</h2>
+            <p class="section-subtitle">From Tunis to Toronto, we work with founders and product teams who care about the details.</p>
+          </div>
+          <div class="testimonials-grid">
+            <article class="testimonial-card reveal"><div class="testimonial-header"><div class="avatar">L</div><div><div class="testimonial-name">Leila B.</div><div class="testimonial-role">Restaurant Owner · Tunisia</div></div></div><div class="stars">★★★★★</div><p class="testimonial-text">"NexaWeb translated our offline experience into a digital one that feels just as premium. We saw more bookings within the first month."</p></article>
+            <article class="testimonial-card reveal"><div class="testimonial-header"><div class="avatar">A</div><div><div class="testimonial-name">Alex R.</div><div class="testimonial-role">SaaS Founder · Canada</div></div></div><div class="stars">★★★★★</div><p class="testimonial-text">"They quickly understood our value prop and turned it into a clean dashboard and marketing site. Our trial-to-paid conversions went up significantly."</p></article>
+            <article class="testimonial-card reveal"><div class="testimonial-header"><div class="avatar">M</div><div><div class="testimonial-name">Meriem K.</div><div class="testimonial-role">E-commerce Manager · France</div></div></div><div class="stars">★★★★★</div><p class="testimonial-text">"Working remotely with a Tunisia-based team was seamless. The new store is faster and our customers spend more time exploring products."</p></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact">
+        <div class="container">
+          <div class="section-header reveal">
+            <div class="section-tag"><span class="section-tag-dot"></span>Contact</div>
+            <h2 class="section-title">Tell us about your <span class="gradient">next project</span>.</h2>
+            <p class="section-subtitle">Share a bit about your idea, budget and timeline. We'll come back with a tailored proposal from Tunisia.</p>
+          </div>
+          <div class="contact-grid">
+            <div class="contact-left reveal slide-right">
+              <div class="contact-pill"><span class="contact-pill-dot"></span>Average response time: under 24h</div>
+              <p class="contact-intro">We work with startups, small businesses and established brands across Europe, North America and MENA. Every project starts with a conversation.</p>
+              <ul class="contact-list">
+                <li><span>➤</span><span>Based in Tunisia · Remote collaborations worldwide</span></li>
+                <li><span>➤</span><span>We speak English, French & Arabic</span></li>
+                <li><span>➤</span><span>Projects typically start from 299DT</span></li>
+              </ul>
+            </div>
+            <div class="contact-right reveal">
+              <div class="contact-form-card">
+                <form id="contact-form" novalidate>
+                  <div class="form-row">
+                    <div class="form-group"><label for="name">Full Name<span class="required">*</span></label><input type="text" id="name" name="name" placeholder="Your name" required /><div class="error-message">Please enter your name.</div></div>
+                    <div class="form-group"><label for="email">Email<span class="required">*</span></label><input type="email" id="email" name="email" placeholder="you@example.com" required /><div class="error-message">Please enter a valid email.</div></div>
+                  </div>
+                  <div class="form-row">
+                    <div class="form-group"><label for="budget">Estimated Budget<span class="required">*</span></label><select id="budget" name="budget" required><option value="">Select your range</option><option value="299-599">299DT – 599DT</option><option value="600-1500">600DT – 1,500DT</option><option value="1500+">1,500DT+</option></select><div class="error-message">Please select a budget range.</div></div>
+                    <div class="form-group"><label for="timeline">Ideal Timeline</label><input type="text" id="timeline" name="timeline" placeholder="e.g. 4–6 weeks" /></div>
+                  </div>
+                  <div class="form-group"><label for="project">Project Description<span class="required">*</span></label><textarea id="project" name="project" rows="4" placeholder="Tell us about your brand, goals and what you'd like to build." required></textarea><div class="error-message">Please describe your project.</div></div>
+                  <div class="form-footer">
+                    <button class="btn btn-primary" type="submit"><span>Submit Project Brief</span><span class="btn-icon">↗</span></button>
+                    <div class="form-status" id="form-status"></div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-inner">
+          <div class="footer-left"><div class="nav-logo-mark">N</div><span>© <span id="year"></span> NexaWeb · Crafted in Tunisia.</span></div>
+          <div class="footer-links"><a data-scroll="#services">Services</a><a data-scroll="#projects">Work</a><a data-scroll="#contact">Get a Quote</a></div>
+          <div class="footer-social"><a href="#" class="social-btn">D</a><a href="#" class="social-btn">B</a><a href="#" class="social-btn">in</a></div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Smooth scroll
+    document.querySelectorAll("[data-scroll]").forEach(function(el) {
+      el.addEventListener("click", function(e) {
+        e.preventDefault();
+        const target = document.querySelector(el.getAttribute("data-scroll"));
+        if (!target) return;
+        const navHeight = document.querySelector(".navbar").offsetHeight;
+        window.scrollTo({ top: target.getBoundingClientRect().top + window.pageYOffset - navHeight + 10, behavior: "smooth" });
+        const hamburger = document.querySelector(".hamburger");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        if (hamburger.classList.contains("active")) { hamburger.classList.remove("active"); mobileMenu.classList.remove("open"); }
+      });
+    });
+
+    // Navbar scroll
+    const navbar = document.querySelector(".navbar");
+    window.addEventListener("scroll", function() { navbar.classList.toggle("scrolled", window.scrollY > 40); });
+
+    // Hamburger
+    const hamburger = document.querySelector(".hamburger");
+    const mobileMenu = document.querySelector(".mobile-menu");
+    hamburger.addEventListener("click", function() {
+      const isActive = hamburger.classList.toggle("active");
+      mobileMenu.classList.toggle("open", isActive);
+      hamburger.setAttribute("aria-expanded", isActive);
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); obs.unobserve(e.target); } });
+    }, { threshold: 0.16 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    // Counter animation
+    let countersStarted = false;
+    const counterObserver = new IntersectionObserver((entries, obs) => {
+      entries.forEach(e => {
+        if (e.isIntersecting && !countersStarted) {
+          countersStarted = true;
+          document.querySelectorAll(".counter").forEach(counter => {
+            const target = parseInt(counter.getAttribute("data-target"));
+            const start = performance.now();
+            const duration = 1600;
+            function update(now) {
+              const progress = Math.min((now - start) / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              counter.textContent = Math.round(target * eased);
+              if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+          });
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.4 });
+
+    const heroGrid = document.querySelector(".hero-grid");
+    if (heroGrid) counterObserver.observe(heroGrid);
+
+    // Form validation
+    const form = document.getElementById("contact-form");
+    const formStatus = document.getElementById("form-status");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      formStatus.textContent = "";
+      formStatus.classList.remove("success", "error");
+      let isValid = true;
+
+      const fields = [
+        { id: "name", validator: v => v.trim().length > 1, message: "Please enter your name." },
+        { id: "email", validator: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v), message: "Please enter a valid email." },
+        { id: "budget", validator: v => v !== "", message: "Please select a budget range." },
+        { id: "project", validator: v => v.trim().length > 10, message: "Please describe your project." },
+      ];
+
+      fields.forEach(({ id, validator, message }) => {
+        const input = document.getElementById(id);
+        const group = input.closest(".form-group");
+        const errorEl = group.querySelector(".error-message");
+        if (!validator(input.value || "")) {
+          isValid = false; group.classList.add("invalid");
+          if (errorEl) errorEl.textContent = message;
+        } else { group.classList.remove("invalid"); }
+      });
+
+      if (!isValid) { formStatus.textContent = "Please fix the highlighted fields."; formStatus.classList.add("error"); return; }
+      formStatus.textContent = "Thank you! We'll get back to you within 24 hours.";
+      formStatus.classList.add("success"); form.reset();
+    });
+
+    form.querySelectorAll("input, textarea, select").forEach(field => {
+      field.addEventListener("input", () => { field.closest(".form-group")?.classList.remove("invalid"); });
+    });
+  </script>
+</body>
+</html>
